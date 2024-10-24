@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Image Encryption</title>
+</head>
+
+<body>
+
+        <h1>Image Encryption/Decryption</h1>
+        <!-- Encryption Form -->
+        <div class="col">
+            <form id="encrypt-form" enctype="multipart/form-data" method="POST" action="/encrypt">
+                <h2>Encrypt Image</h2>
+                <input type="file" name="image" required>
+                <button type="submit">Encrypt Image</button>
+            </form>
+
+            <h3>Encrypted Image:</h3>
+            <textarea id="encrypted-image" rows="10" cols="50" readonly></textarea>
+
+            <h3>Decryption Key:</h3>
+            <textarea id="decryption-key" rows="1" cols="50" readonly></textarea>
+        </div>
+        <hr>
+        <!-- Decryption Form -->
+        <div class="col">
+            <form id="decrypt-form" method="POST" action="/decrypt">
+                <h2>Decrypt Image</h2>
+                <textarea name="encrypted_image" id="decrypt-encrypted-image" placeholder="Paste encrypted image here"
+                    required></textarea><br>
+                <input type="text" name="key" id="decrypt-key" placeholder="Enter the decryption key" required><br>
+                <button type="submit">Decrypt Image</button>
+            </form>
+        </div>
+
+
+    <script>
+        const encryptForm = document.getElementById('encrypt-form');
+        const encryptedImageField = document.getElementById('encrypted-image');
+        const decryptionKeyField = document.getElementById('decryption-key');
+
+        encryptForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(encryptForm);
+
+            const response = await fetch('/encrypt', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            encryptedImageField.value = data.encrypted_image;
+            decryptionKeyField.value = data.key;
+        });
+    </script>
+</body>
+
+</html>
