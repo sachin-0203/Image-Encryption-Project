@@ -96,8 +96,18 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 # Project Images
 ## Encryption Page : 
 <img width="939" alt="Encryption Image" src="https://github.com/user-attachments/assets/4a0b709f-c4cb-4648-a76e-f2c70191bae0">
+
 ## Decryption Page :
 <img width="939" alt="Decryption Image" src="https://github.com/user-attachments/assets/2d213fc4-1c3a-46a2-856e-a13edaced268">
+
+## Encrypted the Image :
+### this generate the Encrypted Image and a Decryption Key
+<img width="939" alt="Encryption Process" src="https://github.com/user-attachments/assets/b044e80d-f9b7-4f5a-9bf2-49dc7a2e970b">
+
+## Decrypted the Image : 
+### this take the Encrypted Image and Decrypted Key to generate the Original Image and Download it
+<img width="939" alt="Decryption Process" src="https://github.com/user-attachments/assets/7c42985b-ac73-4a32-9b6d-aae099cdbee0">
+
 
 
 
