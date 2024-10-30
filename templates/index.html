@@ -10,53 +10,73 @@
 
 <body>
 
-        <h1>Image Encryption/Decryption</h1>
+    <!-- Full-Screen Landing Section -->
+    <header class="landing">
+        <div class="landing-content">
+            <h1>Welcome to Image Encryption</h1>
+            <p>Securely encrypt and decrypt your images.</p>
+            <button onclick="scrollToForms()" class="cta-button">Get Started</button>
+        </div>
+    </header>
+
+    <!-- Main Container for Encryption/Decryption Forms -->
+    <main class="container" id="forms-section">
         <!-- Encryption Form -->
-        <div class="col">
+        <section class="col">
+            <h2>Encrypt Image</h2>
             <form id="encrypt-form" enctype="multipart/form-data" method="POST" action="/encrypt">
-                <h2>Encrypt Image</h2>
                 <input type="file" name="image" required>
                 <button type="submit">Encrypt Image</button>
+                <button type="button" onclick="resetForm()" class="reset-btn">Reset</button>
+                <div class="spinner" id="encrypt-spinner"></div>
             </form>
 
             <h3>Encrypted Image:</h3>
-            <textarea id="encrypted-image" rows="10" cols="50" readonly></textarea>
+            <textarea id="encrypted-image" rows="5" readonly></textarea>
 
             <h3>Decryption Key:</h3>
-            <textarea id="decryption-key" rows="1" cols="50" readonly></textarea>
-        </div>
+            <textarea id="decryption-key" rows="1" readonly></textarea>
+
+            <button onclick="downloadEncryptedData()" id="download-btn" style="display:none;">Download Encrypted
+                Data</button>
+
+        </section>
+
         <hr>
-        <!-- Decryption Form -->
-        <div class="col">
+
+        <!-- Decryption Section -->
+        <section class="col">
+            <h2>Decrypt Image</h2>
             <form id="decrypt-form" method="POST" action="/decrypt">
-                <h2>Decrypt Image</h2>
-                <textarea name="encrypted_image" id="decrypt-encrypted-image" placeholder="Paste encrypted image here"
-                    required></textarea><br>
-                <input type="text" name="key" id="decrypt-key" placeholder="Enter the decryption key" required><br>
+
+                <!-- Encrypted Image Field with Tooltip Icon -->
+                <div class="input-group">
+                    <textarea name="encrypted_image" id="decrypt-encrypted-image"
+                        placeholder="Paste encrypted image here" required></textarea>
+                    <span class="tooltip" data-tooltip="Paste encrypted image"
+                        onclick="pasteEncryptedImage()">&#128203;</span>
+                </div>
+
+                <!-- Decryption Key Field with Tooltip Icon -->
+                <div class="input-group">
+                    <input type="text" name="key" id="decrypt-key" placeholder="Enter the decryption key" required>
+                    <span class="tooltip" data-tooltip="Paste decryption key"
+                        onclick="pasteDecryptionKey()">&#128203;</span>
+                </div>
+
                 <button type="submit">Decrypt Image</button>
+                <button type="button" onclick="resetForm()" class="reset-btn">Reset</button>
             </form>
-        </div>
+        </section>
 
 
-    <script>
-        const encryptForm = document.getElementById('encrypt-form');
-        const encryptedImageField = document.getElementById('encrypted-image');
-        const decryptionKeyField = document.getElementById('decryption-key');
+    </main>
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
 
-        encryptForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const formData = new FormData(encryptForm);
 
-            const response = await fetch('/encrypt', {
-                method: 'POST',
-                body: formData
-            });
-
-            const data = await response.json();
-            encryptedImageField.value = data.encrypted_image;
-            decryptionKeyField.value = data.key;
-        });
-    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
 </html>
