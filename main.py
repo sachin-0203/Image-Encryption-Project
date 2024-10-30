@@ -1,64 +1,71 @@
-from flask import Flask, render_template, request, send_file, jsonify
+from flask import Flask, request, jsonify, render_template, send_file
 from cryptography.fernet import Fernet
-import os
-import io
+from io import BytesIO
+import base64
 
 app = Flask(__name__)
 
+# Route for the main page
 @app.route('/')
-def index():
+def home():
     return render_template('index.html')
 
+# Route for image encryption
 @app.route('/encrypt', methods=['POST'])
-def encrypt():
+def encrypt_image():
+    # Check if an image file is provided
     if 'image' not in request.files:
-        return "No image uploaded", 400
+        return jsonify({"error": "No image file provided"}), 400
 
-    file = request.files['image']
-    image_data = file.read()
+    image_file = request.files['image']
+    image_data = image_file.read()
 
-    # Generate a key for this encryption
+    # Generate a random encryption key
     key = Fernet.generate_key()
-    cipher = Fernet(key)
+    fernet = Fernet(key)
 
     # Encrypt the image data
-    encrypted_image = cipher.encrypt(image_data)
+    encrypted_data = fernet.encrypt(image_data)
 
-    # Send encrypted image and key back to user
-    response_data = {
-        'encrypted_image': encrypted_image.decode('utf-8'),  # Convert bytes to string
-        'key': key.decode('utf-8')  # Send the key as well
-    }
+    # Convert encrypted data and key to base64 for easier transmission
+    encrypted_image_b64 = base64.b64encode(encrypted_data).decode('utf-8')
+    key_b64 = base64.b64encode(key).decode('utf-8')
 
-    return jsonify(response_data)
+    return jsonify({
+        "encrypted_image": encrypted_image_b64,
+        "key": key_b64
+    })
 
+# Route for image decryption
 @app.route('/decrypt', methods=['POST'])
-def decrypt():
+def decrypt_image():
+    # Retrieve encrypted image and key from the form
+    encrypted_image_b64 = request.form.get('encrypted_image')
+    key_b64 = request.form.get('key')
+
+    if not encrypted_image_b64 or not key_b64:
+        return jsonify({"error": "Encrypted image or key is missing"}), 400
+
+    # Decode the base64 encoded data
+    encrypted_data = base64.b64decode(encrypted_image_b64)
+    key = base64.b64decode(key_b64)
+
+    # Initialize Fernet with the provided key
+    fernet = Fernet(key)
+
     try:
-        # Get the encrypted image data and the decryption key from the form
-        encrypted_image_data = request.form['encrypted_image']
-        decryption_key = request.form['key']
-
-        # Convert encrypted data and key back to bytes
-        encrypted_image_data = encrypted_image_data.encode('utf-8')
-        decryption_key = decryption_key.encode('utf-8')
-
-        # Create cipher with the provided key
-        cipher = Fernet(decryption_key)
-
         # Decrypt the image data
-        decrypted_image_data = cipher.decrypt(encrypted_image_data)
+        decrypted_data = fernet.decrypt(encrypted_data)
 
+        # Serve the decrypted image file
         return send_file(
-            io.BytesIO(decrypted_image_data),
-            mimetype='image/png',
+            BytesIO(decrypted_data),
+            mimetype='image/jpeg',
             as_attachment=True,
-            download_name='decrypted_image.png'
+            download_name="decrypted_image.jpg"
         )
     except Exception as e:
-        print(f"Error during decryption: {str(e)}")
-        return f"Error during decryption: {str(e)}", 500
+        return jsonify({"error": "Failed to decrypt image. Check the key and encrypted data."}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)
-
