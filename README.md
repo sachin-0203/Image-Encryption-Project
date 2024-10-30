@@ -1,6 +1,29 @@
 
 # Image Encryption Project
 
+## Landing Page : 
+
+<img width="939" alt="Landing Page" src="https://github.com/user-attachments/assets/eb7123ae-d56a-4faa-86e7-65bfad1431f3">
+
+## Encryption Page  and  Decryption Page :
+<img width="939" alt="Encryption and Decryption Page" src="https://github.com/user-attachments/assets/9d17122a-b2a9-40c8-b82c-e1ccdb373dcf">
+
+
+## Encrypted the Image :
+### this generate the Encrypted Image and a Decryption Key
+<img width="939" alt="Encryption Process" src="https://github.com/user-attachments/assets/d2ac497a-7af1-4744-95a2-f4c47eedb5d5">
+
+## Download the Encrypted Image : 
+<img width="939" alt="Encrypted Image" src="https://github.com/user-attachments/assets/39d4e182-2339-4eda-bff2-5e0dc4185eb1">
+
+
+## Decrypted the Image :
+
+### There is a paste Tooltip for pasting the image and key
+<img width="939" alt="Decryption Process" src="https://github.com/user-attachments/assets/c4622303-3814-4fb8-9a55-a3b0945b4a45">
+
+### This take the Encrypted Image and Decrypted Key to generate the Original Image and Download it
+<img width="939" alt="Decrypted Image" src="https://github.com/user-attachments/assets/a0f483ff-4e33-4125-b648-b7a27270bc14">
 
 ## Overview
 
@@ -16,8 +39,6 @@
 #### Decrypt the encrypted image by providing the correct key.
 
 #### Simple and intuitive web-based user interface.
-<img width="939" alt="Encryption Process" src="https://github.com/user-attachments/assets/fc58d1f6-1950-4d58-befb-2f9c52cf3d19">
-
 <img width="939" alt="Encryption Image" src="https://github.com/user-attachments/assets/c944f1b9-37c1-458b-abb7-bd205b0d5561">
 
 ## Technologies Used
@@ -96,32 +117,6 @@ Contributions are welcome! Feel free to submit issues, feature requests, or pull
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-
-# Project Images
-
-## Landing Page : 
-
-<img width="939" alt="Landing Page" src="https://github.com/user-attachments/assets/eb7123ae-d56a-4faa-86e7-65bfad1431f3">
-
-## Encryption Page  and  Decryption Page :
-<img width="939" alt="Encryption and Decryption Page" src="https://github.com/user-attachments/assets/9d17122a-b2a9-40c8-b82c-e1ccdb373dcf">
-
-
-## Encrypted the Image :
-### this generate the Encrypted Image and a Decryption Key
-<img width="939" alt="Encryption Process" src="https://github.com/user-attachments/assets/d2ac497a-7af1-4744-95a2-f4c47eedb5d5">
-
-## Download the Encrypted Image : 
-<img width="939" alt="Encrypted Image" src="https://github.com/user-attachments/assets/39d4e182-2339-4eda-bff2-5e0dc4185eb1">
-
-
-## Decrypted the Image :
-
-### There is a paste Tooltip for pasting the image and key
-<img width="939" alt="Decryption Process" src="https://github.com/user-attachments/assets/c4622303-3814-4fb8-9a55-a3b0945b4a45">
-
-### This take the Encrypted Image and Decrypted Key to generate the Original Image and Download it
-<img width="939" alt="Decrypted Image" src="https://github.com/user-attachments/assets/a0f483ff-4e33-4125-b648-b7a27270bc14">
 
 
 
