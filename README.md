@@ -16,6 +16,7 @@
 #### Decrypt the encrypted image by providing the correct key.
 
 #### Simple and intuitive web-based user interface.
+<img width="939" alt="Encryption Process" src="https://github.com/user-attachments/assets/fc58d1f6-1950-4d58-befb-2f9c52cf3d19">
 
 <img width="939" alt="Encryption Image" src="https://github.com/user-attachments/assets/c944f1b9-37c1-458b-abb7-bd205b0d5561">
 
